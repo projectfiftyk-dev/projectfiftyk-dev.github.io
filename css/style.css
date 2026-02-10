@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  padding-top: 70px;
+}
+
+/*
+ Navigation Section
+ Generic
+*/
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  z-index: 1000;
+  background: lightgray;
+}
+
+.nav-container {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+
+.hamburger {
+  display: none;
+}
+
+
+@media (max-width: 768px) {
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: lightgray;
+    display: none;
+    padding: 1rem 0;
+  }
+
+  .nav-links.active {
+    display: flex;
+    }
+  .nav-links li {
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+  }
+}
+
+
+/*
+Generic Sections
+*/
+
+.section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}   
+
+/* Temp for debugging */ 
+.section:nth-child(odd) {
+  background: #f2f2f2;
+}
+
+.section:nth-child(even) {
+  background: #e0e0e0;
+}
+
+@media (max-width: 768px) {
+  .section {
+    height: auto;
+    min-height: 100vh;
+    padding: 4rem 1.5rem;
+  }
+}
+
+/* 
+Footer Section
+*/
+.footer {
+  padding: 2rem 0;
+  background: lightgray;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
