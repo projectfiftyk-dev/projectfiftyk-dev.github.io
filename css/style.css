@@ -221,7 +221,7 @@ Footer Section
 Style
 */
 
-.navbar, .footer {
+.navbar, .footer, .nav-links {
   background-color: #1e1e1e;
   color: #e0e0e0;
 }
@@ -230,6 +230,10 @@ Style
   color: #e0e0e0;
   text-decoration: none;
 }
+
+  .nav-links .active {
+    color: #e63946;
+  }
 
 .nav-links a:hover, .footer-links a:hover, .cta:hover {
   color: #ff4d4d;
