@@ -134,6 +134,27 @@ Generic Sections
   }
 }
 
+/*
+  Experience Section
+*/
+.exp-skill-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; /* vertical spacing between skills & certificates */
+}
+
+@media (max-width: 768px) {
+  .exp-skill-container {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* 
 Footer Section
 */
@@ -145,5 +166,15 @@ Footer Section
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 2rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* important for responsiveness */
+}
+
+.footer-links {
+  display: flex;
+  gap: 2rem;
 }
