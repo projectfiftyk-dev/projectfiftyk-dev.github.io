@@ -97,69 +97,6 @@ window.addEventListener('keydown', e => {
   }
 }, { passive: false });
 
-const leftArrow = document.querySelector(".cert-arrow.left");
-const rightArrow = document.querySelector(".cert-arrow.right");
-const cardsContainer = document.querySelector(".certificates-cards");
-
-let currentIndex = 0;
-const cards = cardsContainer.querySelectorAll(".certificate-card");
-const totalCards = cards.length;
-
-leftArrow.addEventListener("click", () => {
-  if (currentIndex > 0) currentIndex--;
-  cardsContainer.scrollTo({
-    left: cards[currentIndex].offsetLeft,
-    behavior: "smooth"
-  });
-});
-
-rightArrow.addEventListener("click", () => {
-  if (currentIndex < totalCards - 1) currentIndex++;
-  cardsContainer.scrollTo({
-    left: cards[currentIndex].offsetLeft,
-    behavior: "smooth"
-  });
-});
-
-// Array of cool colors
-const cardColors = [
-  "#e63946", // red
-  "#f1faee", // off-white
-  "#a8dadc", // teal
-  "#457b9d", // blue
-  "#ffb703", // yellow
-  "#6a4c93", // purple
-  "#ff6f61", // coral
-  "#2a9d8f"  // greenish
-];
-
-// Function to calculate luminance and return black/white for contrast
-function getContrastColor(hexColor) {
-  // Remove # if present
-  const c = hexColor.charAt(0) === '#' ? hexColor.substring(1) : hexColor;
-
-  // Convert to RGB
-  const r = parseInt(c.substring(0,2),16);
-  const g = parseInt(c.substring(2,4),16);
-  const b = parseInt(c.substring(4,6),16);
-
-  // Calculate relative luminance
-  const luminance = (0.299*r + 0.587*g + 0.114*b)/255;
-
-  // Return black for bright backgrounds, white for dark
-  return luminance > 0.5 ? "#000000" : "#ffffff";
-}
-
-// Select all certificate cards
-const certificateCards = document.querySelectorAll(".certificate-card");
-
-// Assign random background color and matching text color
-certificateCards.forEach(card => {
-  const randomColor = cardColors[Math.floor(Math.random() * cardColors.length)];
-  card.style.backgroundColor = randomColor;
-  card.style.color = getContrastColor(randomColor);
-});
-
 
 // Select the elements
 const projectsSection = document.querySelector("#projects");
@@ -190,3 +127,80 @@ const projectsObserver = new IntersectionObserver((entries) => {
 
 // Start observing the projects section
 projectsObserver.observe(projectsSection);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const certificatesContainer = document.querySelector(".certificates-cards");
+
+  if (!certificatesContainer) return; // safety check
+  const certificateFiles = [
+    "CS50 Introduction to Programmin with Python.jpg",
+    "CS50x.pdf",
+    "Data Visualization.jpeg",
+    "IBM Generative AI Engineering.pdf",
+    "Mathematics for Machine Learning.pdf",
+    "Pandas.jpeg",
+    "Python.jpeg"
+  ];
+
+  // Array of card colors (same as before)
+  const cardColors = [
+    "#e63946", "#f1faee", "#a8dadc", "#457b9d",
+    "#ffb703", "#6a4c93", "#ff6f61", "#2a9d8f"
+  ];
+
+  function getContrastColor(hexColor) {
+    const c = hexColor.charAt(0) === '#' ? hexColor.substring(1) : hexColor;
+    const r = parseInt(c.substring(0,2),16);
+    const g = parseInt(c.substring(2,4),16);
+    const b = parseInt(c.substring(4,6),16);
+    const luminance = (0.299*r + 0.587*g + 0.114*b)/255;
+    return luminance > 0.5 ? "#000000" : "#ffffff";
+  }
+
+  function createCertificateCard(filename) {
+    const card = document.createElement("div");
+    card.classList.add("certificate-card");
+
+    const randomColor = cardColors[Math.floor(Math.random() * cardColors.length)];
+    card.style.backgroundColor = randomColor;
+    card.style.color = getContrastColor(randomColor);
+
+    const displayName = filename.split(".")[0].replace(/[-_]/g, " ");
+    card.textContent = displayName;
+
+    card.addEventListener("click", () => {
+      window.open(`assets/certificates/${filename}`, "_blank");
+    });
+
+    return card;
+  }
+
+  certificateFiles.forEach(file => {
+    certificatesContainer.appendChild(createCertificateCard(file));
+  });
+
+  const leftArrow = document.querySelector(".cert-arrow.left");
+  const rightArrow = document.querySelector(".cert-arrow.right");
+  const cardsContainer = document.querySelector(".certificates-cards");
+
+  let currentIndex = 0;
+  const cards = cardsContainer.querySelectorAll(".certificate-card");
+  const totalCards = cards.length;
+
+  leftArrow.addEventListener("click", () => {
+    if (currentIndex > 0) currentIndex--;
+    cardsContainer.scrollTo({
+      left: cards[currentIndex].offsetLeft,
+      behavior: "smooth"
+    });
+  });
+
+  rightArrow.addEventListener("click", () => {
+    if (currentIndex < totalCards - 1) currentIndex++;
+    cardsContainer.scrollTo({
+      left: cards[currentIndex].offsetLeft,
+      behavior: "smooth"
+    });
+  });
+  
+});

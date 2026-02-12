@@ -887,6 +887,11 @@ Style
   text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
   scroll-snap-align: start;
+
+  /* NEW: center text vertically */
+  display: flex;
+  align-items: center;     /* vertical centering */
+  justify-content: center; /* horizontal centering */
 }
 
 .certificates-cards::-webkit-scrollbar {
