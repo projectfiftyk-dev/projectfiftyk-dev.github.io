@@ -869,9 +869,11 @@ Style
   display: flex;
   transition: transform 0.3s ease; /* smooth sliding */
   width: 100%;
+  gap: 1.5rem;
   overflow-x: auto;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
+  padding: 1rem 0;
 }
 
 .certificate-card {

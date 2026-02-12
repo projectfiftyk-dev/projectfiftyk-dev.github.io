@@ -23,6 +23,14 @@ function updateActiveNav() {
   });
 }
 
+document.addEventListener("click", (e) => {
+  const isClickInsideNav = navLinks.contains(e.target) || hamburger.contains(e.target);
+
+  if (!isClickInsideNav && navLinks.classList.contains("active")) {
+    navLinks.classList.remove("active");
+  }
+});
+
 const sections = [
   ...document.querySelectorAll('section'),
   document.querySelector('footer')
@@ -39,7 +47,8 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, {
   root: null,           // viewport
-  threshold: 0.5        // 50% of section must be visible to be "active"
+  threshold: 0,         // trigger as soon as any part enters
+  rootMargin: "-30% 0px -30% 0px" // optional: adjust activation slightly before/after fully visible
 });
 
 sections.forEach(section => observer.observe(section));
@@ -59,6 +68,13 @@ function scrollToSection(index) {
 
 window.addEventListener('wheel', (e) => {
   if (window.innerWidth <= 768) return; // keep normal scroll on mobile
+
+  const scrollableParent = e.target.closest('.right-column');
+  
+  if (scrollableParent) {
+    // Let scrolling happen inside the right column
+    return; 
+  }
 
   e.preventDefault(); // stop default smooth/fast scrolling
 
@@ -103,4 +119,43 @@ rightArrow.addEventListener("click", () => {
     left: cards[currentIndex].offsetLeft,
     behavior: "smooth"
   });
+});
+
+// Array of cool colors
+const cardColors = [
+  "#e63946", // red
+  "#f1faee", // off-white
+  "#a8dadc", // teal
+  "#457b9d", // blue
+  "#ffb703", // yellow
+  "#6a4c93", // purple
+  "#ff6f61", // coral
+  "#2a9d8f"  // greenish
+];
+
+// Function to calculate luminance and return black/white for contrast
+function getContrastColor(hexColor) {
+  // Remove # if present
+  const c = hexColor.charAt(0) === '#' ? hexColor.substring(1) : hexColor;
+
+  // Convert to RGB
+  const r = parseInt(c.substring(0,2),16);
+  const g = parseInt(c.substring(2,4),16);
+  const b = parseInt(c.substring(4,6),16);
+
+  // Calculate relative luminance
+  const luminance = (0.299*r + 0.587*g + 0.114*b)/255;
+
+  // Return black for bright backgrounds, white for dark
+  return luminance > 0.5 ? "#000000" : "#ffffff";
+}
+
+// Select all certificate cards
+const certificateCards = document.querySelectorAll(".certificate-card");
+
+// Assign random background color and matching text color
+certificateCards.forEach(card => {
+  const randomColor = cardColors[Math.floor(Math.random() * cardColors.length)];
+  card.style.backgroundColor = randomColor;
+  card.style.color = getContrastColor(randomColor);
 });
