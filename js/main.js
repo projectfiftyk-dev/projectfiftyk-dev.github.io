@@ -159,3 +159,34 @@ certificateCards.forEach(card => {
   card.style.backgroundColor = randomColor;
   card.style.color = getContrastColor(randomColor);
 });
+
+
+// Select the elements
+const projectsSection = document.querySelector("#projects");
+const progressBar = projectsSection.querySelector(".progress-bar");
+const projectsMessage = projectsSection.querySelector(".projects-message");
+
+let animationPlayed = false; // flag to run animation only once
+
+// Intersection Observer to trigger animation when in view
+const projectsObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting && !animationPlayed) {
+      animationPlayed = true;
+
+      // Animate the progress bar
+      progressBar.style.animation = "loadProgress 2s forwards";
+
+      // Animate message after progress bar
+      setTimeout(() => {
+        projectsMessage.style.animation = "fadeIn 0.5s forwards";
+      }, 2000); // same as progress bar duration
+    }
+  });
+}, {
+  root: null,       // viewport
+  threshold: 0.5    // 50% of projects section visible
+});
+
+// Start observing the projects section
+projectsObserver.observe(projectsSection);
