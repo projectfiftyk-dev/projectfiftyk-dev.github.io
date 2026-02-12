@@ -20,7 +20,7 @@ This repository hosts my **personal online CV and portfolio**, built with HTML, 
 
 ## Live Demo
 
-🔗 [View Live Portfolio](https://yourusername.github.io/your-repo-name/)
+🔗 [View Live Portfolio](https://projectfiftyk-dev.github.io/)
 
 ---
 
@@ -48,7 +48,7 @@ This repository hosts my **personal online CV and portfolio**, built with HTML, 
 To run the website locally:
 
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
+git clone https://github.com/projectfiftyk-dev/projectfiftyk-dev.github.io
 cd your-repo-name
 open index.html
 ```
