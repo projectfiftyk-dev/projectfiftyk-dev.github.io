@@ -168,27 +168,6 @@ Generic Sections
   }
 }
 
-/*
-  Experience Section
-*/
-.exp-skill-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
-}
-
-.right-column {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem; /* vertical spacing between skills & certificates */
-}
-
-@media (max-width: 768px) {
-  .exp-skill-container {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* 
 Footer Section
 */
@@ -534,12 +513,6 @@ Generic Sections
   gap: 6rem;
 }
 
-.right-column {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem; /* vertical spacing between skills & certificates */
-}
-
 @media (max-width: 768px) {
   .exp-skill-container {
     grid-template-columns: 1fr;
@@ -751,5 +724,248 @@ Style
 
   .visual-placeholder {
     display: none;
+  }
+}
+
+/*
+
+  Exp Styling
+*/
+
+/* Experience Section */
+
+#experience {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 0 2rem; /* keep some horizontal padding */
+}
+
+
+.exp-skill-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr; /* Professional Experience twice as wide as right column */
+  padding-top: 4rem;
+  gap: 4rem;
+  max-height: 80vh;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-height: 80vh;       /* same as container */
+  border-radius: 12px;    /* match blocks styling */
+  overflow-y: hidden;
+  max-height: 80vh;
+  box-sizing: border-box; /* include padding in width/height */
+}
+
+.right-column:hover {
+  overflow-y: auto;
+}
+
+/* Style the scrollbar for right-column */
+.right-column::-webkit-scrollbar {
+  width: 8px; /* scrollbar width */
+}
+
+.right-column::-webkit-scrollbar-track {
+  background-color: #1a1a1a; /* match background of right-column */
+  border-radius: 12px;
+}
+
+.right-column::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent);
+  border-radius: 10px;
+  border: 2px solid #1a1a1a; /* ensure scrollbar sits inside */
+}
+
+.right-column::-webkit-scrollbar-thumb:hover {
+  background-color: #ff4d4d;
+}
+
+.experience-block, .skills-block, .certificates-block {
+  background-color: #1e1e1e;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  color: var(--color-text);
+  width: 100%;
+}
+
+/* Professional Experience */
+.experience-block h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-accent);
+}
+
+.experience-item {
+  margin-bottom: 1.5rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-accent);
+}
+
+.experience-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.experience-item .company {
+  font-size: 0.95rem;
+  color: var(--color-secondary);
+  margin-bottom: 0.7rem;
+}
+
+.experience-item ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+.experience-item ul li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+/* Skills Block */
+.skills-block h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--color-accent);
+}
+
+.skill-group {
+  margin-bottom: 1rem;
+}
+
+.skill-group h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent);
+}
+
+.skill-group ul {
+  list-style-type: circle;
+  margin-left: 1.2rem;
+}
+
+.skill-group ul li {
+  margin-bottom: 0.3rem;
+}
+
+.certificates-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  overflow: hidden; /* already correct */
+}
+
+.certificates-cards {
+  display: flex;
+  transition: transform 0.3s ease; /* smooth sliding */
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.certificate-card {
+  flex: 0 0 100%;  /* fixed width = wrapper width */
+  max-width: 100%; /* ensure it doesn’t overflow */
+  margin: 1rem 0;       /* remove gaps */
+  padding: 2rem;   /* internal padding */
+  border-radius: 10px;
+  background-color: #2a2a2a;
+  color: var(--color-text);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  scroll-snap-align: start;
+}
+
+.certificates-cards::-webkit-scrollbar {
+  display: none;
+}
+
+.cert-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background-color: rgba(30,30,30,0.8);
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.cert-arrow.left {
+  left: 0.5rem;
+}
+
+.cert-arrow.right {
+  right: 0.5rem;
+}
+
+.cert-arrow:hover {
+  background-color: var(--color-accent);
+}
+
+.experience-block,
+.skills-block,
+.certificates-block {
+  transition: transform 0.3s, box-shadow 0.3s; /* include box-shadow if you want shadow changes too */
+}
+
+/* Hover state: apply transform */
+.experience-block:hover,
+.skills-block:hover,
+.certificates-block:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5); /* optional: lift shadow on hover */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #experience {
+    height: auto;          /* let content define height */
+    align-items: flex-start; /* align content to top */
+    padding: 2rem 1.5rem;  /* some spacing */
+  }
+
+  /* Stack experience and right-column blocks vertically */
+  .exp-skill-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-height: none;      /* allow content to grow naturally */
+  }
+
+  /* Make left and right columns full width */
+  .experience-block,
+  .skills-block,
+  .certificates-block {
+    width: 100%;
+    padding: 1.5rem;
+    box-sizing: border-box;
+  }
+
+  /* Right column adjustments */
+  .right-column {
+    max-height: none;      /* remove height restriction */
+    overflow-y: visible;   /* allow full content without scroll */
+    padding: 1rem 0;       /* optional spacing */
+  }
+
+  /* Certificate cards responsive width */
+  .certificate-card {
+    min-width: 160px;
   }
 }

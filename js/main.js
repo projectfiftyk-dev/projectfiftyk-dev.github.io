@@ -80,3 +80,27 @@ window.addEventListener('keydown', e => {
     scrollToSection(currentSectionIndex - 1);
   }
 }, { passive: false });
+
+const leftArrow = document.querySelector(".cert-arrow.left");
+const rightArrow = document.querySelector(".cert-arrow.right");
+const cardsContainer = document.querySelector(".certificates-cards");
+
+let currentIndex = 0;
+const cards = cardsContainer.querySelectorAll(".certificate-card");
+const totalCards = cards.length;
+
+leftArrow.addEventListener("click", () => {
+  if (currentIndex > 0) currentIndex--;
+  cardsContainer.scrollTo({
+    left: cards[currentIndex].offsetLeft,
+    behavior: "smooth"
+  });
+});
+
+rightArrow.addEventListener("click", () => {
+  if (currentIndex < totalCards - 1) currentIndex++;
+  cardsContainer.scrollTo({
+    left: cards[currentIndex].offsetLeft,
+    behavior: "smooth"
+  });
+});
